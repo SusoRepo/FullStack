@@ -22,9 +22,15 @@ public class IncidenceController {
     IncidenceService incidenceService;
 
     @PostMapping("/incidence")
-    public ResponseEntity<Integer> storeIncidence(@RequestBody incidenceDTO entity) {
+    public ResponseEntity<Void> storeIncidence(@RequestBody incidenceDTO entity) {
         //TODO: process POST request
-       return new ResponseEntity<Integer>(1, HttpStatus.ACCEPTED);                 
+        try {
+            incidenceService.storeIncidence(entity);
+            return ResponseEntity.status(HttpStatus.OK).build(); 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); 
+        }
+                      
      
     }
 }

@@ -17,14 +17,10 @@ public class IncidenceServiceImpl  implements IncidenceService {
     @Autowired
     IncidenceRepository incidenceRepository;
 
-    @Override
-    public incidenceDTO getIncidenceById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getIncidenceById'");
-    }
+
 
     @Override
-    public List<incidenceDTO> getIncidenceByUserName(String username) {
+    public List<Incidence> getIncidenceByUserName(String username) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getIncidenceByUserName'");
     }
@@ -46,5 +42,12 @@ public class IncidenceServiceImpl  implements IncidenceService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteIncidence'");
     }
+
+    @Override
+    public List<Incidence> getAllIncidences() {
+        return incidenceRepository.findAll();
+    }
+
+     
 
 }
