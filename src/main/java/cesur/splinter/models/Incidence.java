@@ -2,8 +2,8 @@ package cesur.splinter.models;
 
 import java.time.LocalDateTime;
 
-import cesur.splinter.models.utils.Priorities;
-import cesur.splinter.models.utils.Scopes;
+import cesur.splinter.models.utils.enums.Priorities;
+import cesur.splinter.models.utils.enums.Scopes;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

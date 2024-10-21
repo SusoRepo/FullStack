@@ -2,7 +2,7 @@ package cesur.splinter.models;
 
 import java.time.LocalDateTime;
 
-import cesur.splinter.models.utils.Roles;
+import cesur.splinter.models.utils.enums.Roles;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

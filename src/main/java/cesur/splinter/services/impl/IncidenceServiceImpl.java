@@ -1,13 +1,16 @@
 package cesur.splinter.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cesur.splinter.models.Incidence;
+import cesur.splinter.models.User;
 import cesur.splinter.models.dto.incidenceDTO;
 import cesur.splinter.repositry.IncidenceRepository;
+import cesur.splinter.repositry.UserRepository;
 import cesur.splinter.services.IncidenceService;
 import java.time.LocalDateTime;
 
@@ -16,7 +19,8 @@ public class IncidenceServiceImpl  implements IncidenceService {
 
     @Autowired
     IncidenceRepository incidenceRepository;
-
+    @Autowired
+    UserRepository userRepository;
 
 
     @Override
@@ -26,14 +30,17 @@ public class IncidenceServiceImpl  implements IncidenceService {
     }
 
     @Override
-    public void storeIncidence(incidenceDTO datos) {        
-        Incidence incidence = new Incidence();
-        incidence.setDescription(datos.getDescription());
-        incidence.setCreatedAt(LocalDateTime.now());
-        incidence.setPriority(datos.getPriority());
-        incidence.setScope(datos.getScope());
-        incidence.setUserCreated(null);
-        incidenceRepository.save(incidence);
+    public void storeIncidence(incidenceDTO datos) {  
+        Optional<User> user = userRepository.findById(Long.parseLong(datos.getUserCreated()));
+        if (user.isPresent()) {
+            Incidence incidence = new Incidence();
+            incidence.setDescription(datos.getDescription());
+            incidence.setCreatedAt(LocalDateTime.now());
+            incidence.setPriority(datos.getPriority());
+            incidence.setScope(datos.getScope());
+            incidence.setUserCreated(user.get());
+            incidenceRepository.save(incidence);          
+        }
          
     }
 
