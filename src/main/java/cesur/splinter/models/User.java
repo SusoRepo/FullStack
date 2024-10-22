@@ -42,8 +42,8 @@ public class User {
     private LocalDateTime deletedAt;
     @Column(name = "updateAt")
     private LocalDateTime updateAt;
-    @Column(name = "lastconnection")
-    private LocalDateTime lastconnection;
+    @Column(name = "lastConnection")
+    private LocalDateTime lastConnection;
 
 
 
