@@ -27,6 +27,8 @@ public interface UserMapper {
     @Mapping(target = "password", ignore = true)
     UserDTO userToUserDTOWithoutPassword(User user);
 
+    UserDTO userTOUserDTOLastconnection (User user);
+
     
 
     // @Mapping(target = "lastconnection", qualifiedByName = "calculateLastConnection")

@@ -13,3 +13,7 @@ public class incidenceDTO {
     private Scopes scope;
     private String userCreated;    
 }
+
+
+
+
