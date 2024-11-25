@@ -26,8 +26,8 @@ public class IncidenceServiceImpl  implements IncidenceService {
     @Override
     public List<Incidence> getIncidenceByUserName(String username) {
         User user = userRepository.getUserByEmail(username).get();
-        Optional<List<Incidence>> incidencesByUser = incidenceRepository.findByUser(user);
-        return incidencesByUser.get();
+        List<Incidence> incidencesByUser = incidenceRepository.findByUser(user.getId()).get();
+        return incidencesByUser;
     }
 
     @Override
@@ -47,7 +47,14 @@ public class IncidenceServiceImpl  implements IncidenceService {
 
     @Override
     public void deleteIncidence(Long id) {
-        incidenceRepository.deleteById(id);      
+        try {
+            Incidence incidence = incidenceRepository.findById(id).get();
+            incidenceRepository.delete(incidence);  
+            
+        } catch (Exception e) {
+            throw new UnsupportedOperationException("Unimplemented method 'deleteIncidence'");
+        }
+            
 
     }
 

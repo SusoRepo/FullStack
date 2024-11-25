@@ -1,6 +1,7 @@
 package cesur.splinter.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cesur.splinter.models.Incidence;
@@ -11,6 +12,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,13 +25,13 @@ public class IncidenceController {
     @Autowired
     IncidenceService incidenceService;
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Incidence>> getAllIncidences() {
+    @GetMapping("/listByUser")
+    public ResponseEntity<List<Incidence>> getIncidencesByUsername(@RequestParam(name = "username") String username) {
         try {
             
-            return ResponseEntity.ok(incidenceService.getAllIncidences());
+            return ResponseEntity.ok(incidenceService.getIncidenceByUserName(username));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
     }
@@ -47,6 +49,18 @@ public class IncidenceController {
                       
      
     }
+
+    @DeleteMapping("")
+    public ResponseEntity<Void> deleteIncidence(@RequestParam(name = "incidence_id") Long id) {
+        try {
+            incidenceService.deleteIncidence(id);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+
 }
 
     /*@PostMapping("/incidence/:id")
